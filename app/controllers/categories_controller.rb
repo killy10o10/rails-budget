@@ -3,11 +3,17 @@ class CategoriesController < ApplicationController
 
   # GET /categories or /categories.json
   def index
-    @categories = Category.all
+    # @categories = current_user.categories.order(created_at: :desc)
+    @categories = Category.where(author_id: current_user.id)
+    @total = calculate_total
   end
 
-  # GET /categories/1 or /categories/1.json
-  def show; end
+  # GET /categories/1 
+  def show
+    @category = Category.find(params[:id])
+    @expenses = ExpenseCategory.all.where(category_id: @category.id).includes(:expense).order(created_at: :desc)
+    @total_expenses = obtain_total
+  end
 
   # GET /categories/new
   def new
@@ -17,20 +23,27 @@ class CategoriesController < ApplicationController
   # GET /categories/1/edit
   def edit; end
 
-  # POST /categories or /categories.json
+  # POST /categories
   def create
     @category = Category.new(category_params)
-
-    respond_to do |format|
-      if @category.save
-        format.html { redirect_to category_url(@category), notice: 'Category was successfully created.' }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    # user = current_user
+    # @category.user = user
+    if @category.save
+      redirect_to @category, notice: 'Budget category successfully created'
+    else
+      render :new, notice: 'Something went wrong😱 Budget category was not created'
     end
+
+    # respond_to do |format|
+    #   if @category.save
+    #     format.html { redirect_to category_url(@category), notice: 'Category was successfully created.' }
+    #   else
+    #     format.html { render :new, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
-  # PATCH/PUT /categories/1 or /categories/1.json
+  # PATCH/PUT /categories/1
   def update
     respond_to do |format|
       if @category.update(category_params)
@@ -41,7 +54,7 @@ class CategoriesController < ApplicationController
     end
   end
 
-  # DELETE /categories/1 or /categories/1.json
+  # DELETE /categories/1
   def destroy
     @category.destroy
 
@@ -52,6 +65,23 @@ class CategoriesController < ApplicationController
 
   private
 
+  def obtain_total
+    sum = 0
+    @expenses.each do |exp|
+      sum += exp.expense.amount.to_i
+    end
+    sum
+  end
+
+  def calculate_total
+    sum = 0
+    exp = ExpenseCategory.all
+    exp.each do |cat|
+      sum += cat.expense.amount.to_i
+    end
+    sum
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_category
     @category = Category.find(params[:id])
@@ -59,6 +89,6 @@ class CategoriesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def category_params
-    params.require(:category).permit(:name, :icon, :user_id)
+    params.require(:category).permit(:name, :icon).merge(author_id: current_user.id)
   end
 end

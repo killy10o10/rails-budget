@@ -1,7 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  /* color: inherit; */
+}
+
 body {
   font-family: 'Proxima Nova', Georgia, sans-serif;
+  background-color: #eee;
 }
 
 .galada {
@@ -36,9 +48,9 @@ body {
   align-items: center;
   justify-content: center;
   border: 1px #eee solid;
-  /* padding: 15px; */
-  height: 30px;
-  width: 30px;
+  /* padding: 5px; */
+  height: 35px;
+  width: 35px;
   cursor: pointer;
 }
 
@@ -64,4 +76,35 @@ body {
 .forgot a {
   text-decoration: none;
   color: grey;
+}
+
+.category-img {
+  width: 70px;
+  height: 70px;
+}
+
+.category-details {
+  background-color: #fff;
+  padding: 10px;
+}
+
+.category-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.img-container {
+  display: flex;
+}
+
+.time {
+  font-size: 11px;
+}
+
+.icon-img {
+  flex: 0.2;
+}
+
+.category-text {
+  flex: 0.8;
 }

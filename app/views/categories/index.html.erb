@@ -1,14 +1,30 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Categories</h1>
-
-<div id="categories">
-  <% @categories.each do |category| %>
-    <%= render category %>
-    <p>
-      <%= link_to "Show this category", category %>
-    </p>
+<div class="d-flex gap-5 container">
+  <% if @categories.any?%>
+    <strong>Total Budget</strong>
+    <p><%= @total %></p>
+    <% else %>
+    <p>No budget has been created yet. Create a <strong>NEW CATEGORY</strong> here</p>
   <% end %>
 </div>
 
-<%= link_to "New category", new_category_path %>
+<div class="container">
+  <% if @categories.any?%>
+    <% @categories.each do |category|%>
+      <%= link_to category_path(category)  do%>
+            <div class="category-details d-flex gap-3">
+              <div class="icon-img">
+                <img class="category-img" src=<%=category.icon%> alt<%=category.name%> />
+              </div >
+              <div class="category-text text-secondary gap-2 d-flex flex-column align-self-end">
+                <div class="category-name d-flex justify-content-between align-items-center">
+                  <span class="fw-bold fs-3"><%= category.name %></span>
+                  <span class="fw-bold fs-3 total text-black"><%= @total %></span>
+                </div>
+                <span class="time fst-italic"><%= category.created_at.strftime('%d %B %Y at %I:%M %p') %></span>
+              </div>
+            </div>
+      <%end%>
+    <%end%>
+  <% end %>
+  <%= link_to "New category", new_category_path %>
+</div>
