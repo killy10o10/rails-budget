@@ -13,7 +13,9 @@
   </head>
 
   <body>
-    <%= render "layouts/navbar"%>
+    <% unless current_page?('/')%>
+      <%= render "layouts/navbar"%>
+    <%end%>
     <main>
       <% if notice %>
         <p class="notice"><%= notice %></p>
