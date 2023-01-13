@@ -3,8 +3,8 @@ class CategoriesController < ApplicationController
 
   # GET /categories or /categories.json
   def index
-    # @categories = current_user.categories.order(created_at: :desc)
-    @categories = Category.where(author_id: current_user.id)
+    @categories = current_user.categories.order(created_at: :desc)
+    # @categories = current_user.categories.includes(:expenses)
     @total = calculate_total
   end
 
@@ -21,7 +21,9 @@ class CategoriesController < ApplicationController
   end
 
   # GET /categories/1/edit
-  def edit; end
+  def edit
+    @category = Category.find(params[:id])
+  end
 
   # POST /categories
   def create
@@ -33,14 +35,6 @@ class CategoriesController < ApplicationController
     else
       render :new, notice: 'Something went wrong😱 Budget category was not created'
     end
-
-    # respond_to do |format|
-    #   if @category.save
-    #     format.html { redirect_to category_url(@category), notice: 'Category was successfully created.' }
-    #   else
-    #     format.html { render :new, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   # PATCH/PUT /categories/1
@@ -56,10 +50,11 @@ class CategoriesController < ApplicationController
 
   # DELETE /categories/1
   def destroy
-    @category.destroy
-
-    respond_to do |format|
-      format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
+    category = Category.find(params[:id])
+    if category.destroy
+      redirect_to categories_url, notice: 'Budget category was successfully destroyed.'
+    else
+      render category, notice: 'Something went wrong! Budget category was not destroyed'
     end
   end
 
