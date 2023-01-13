@@ -8,7 +8,7 @@ class CategoriesController < ApplicationController
     @total = calculate_total
   end
 
-  # GET /categories/1 
+  # GET /categories/1
   def show
     @category = Category.find(params[:id])
     @expenses = ExpenseCategory.all.where(category_id: @category.id).includes(:expense).order(created_at: :desc)

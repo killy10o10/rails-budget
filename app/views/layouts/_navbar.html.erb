@@ -1,22 +1,33 @@
 <nav class="navbar shadow p-3">
-  <div class="hamburger">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  </div>
-  <div class="title">
-    <% if request.path == new_user_registration_path %>
-      <h3 class="nav-header">REGISTER</h3>
-    <% elsif request.path == new_user_session_path %>
-      <h3 class="nav-header">LOG IN</h3>
-    <% elsif request.path == categories_path %>
-      <h3 class="nav-header">CATEGORIES</h3>
-    <% elsif request.path == new_category_path %>
-      <h3 class="nav-header">CATEGORY</h3>
+  <% if request.path == root_path || request.path == categories_path %>
+    <div class="hamburger">
+      <i class="bi bi-list"></i>
+    </div>
+  <% else %>
+    <%= link_to categories_path do %>
+      <i class="bi bi-arrow-left"></i>
+    <% end %> 
+  <% end %>
+
+  <div>
+    <% if request.path == new_user_registration_path%>
+      <h3>REGISTER</h3>
+    <% elsif request.path == new_user_session_path%>
+      <h3>LOG IN</h3>
+    <% elsif request.path == categories_path%>
+      <h3>CATEGORIES</h3>
+    <% elsif request.path == new_category_path%>
+      <h3>CREATE CATEGORY</h3>
+    <% elsif request.path == expenses_path%>
+      <h3 >TRANSACTIONS</h3>
+    <% elsif request.path == new_expense_path%>
+      <h3 >CREATE TRANSACTION</h3>
+    <% elsif request.path == new_user_password_path%>
+      <h3>RESET PASSWORD</h3>
     <% elsif request.path.to_s.include?("edit") && request.path.to_s.include?("categories") %>
-      <h3 class="nav-header">EDIT CATEGORY</h3>
+      <h3>EDIT CATEGORY</h3>
     <% else %>
-      <h3 class="nav-header">HOME</h3>
+      <h3>CATEGORY</h3>
     <% end %>
   </div>
 

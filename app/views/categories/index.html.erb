@@ -11,20 +11,20 @@
   <% if @categories.any?%>
     <% @categories.each do |category|%>
       <%= link_to category_path(category)  do%>
-            <div class="category-details d-flex gap-3">
+            <div class="shadow-sm category-details d-flex gap-3">
               <div class="icon-img">
                 <img class="category-img" src=<%=category.icon%> alt<%=category.name%> />
               </div >
               <div class="category-text text-secondary gap-2 d-flex flex-column align-self-end">
-                <div class="category-name d-flex justify-content-between align-items-center">
-                  <span class="fw-bold fs-3"><%= category.name %></span>
-                  <span class="fw-bold fs-3 total text-black"><%= @total %></span>
+                <div class="category-name border-bottom d-flex justify-content-between align-items-center">
+                  <span class="fw-bold fs-4"><%= category.name %></span>
+                  <span class="fw-bold fs-4 total text-black"><%= @total %></span>
                 </div>
                 <span class="time fst-italic"><%= category.created_at.strftime('%d %B %Y at %I:%M %p') %></span>
               </div>
-            </div>
+            </div> <br>
       <%end%>
     <%end%>
   <% end %>
-  <%= link_to "New category", new_category_path %>
+  <button class="btn btn-success"><%= link_to "NEW CATEGORY", new_category_path %></button>
 </div>

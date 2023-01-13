@@ -1,27 +1,29 @@
-<%= form_with(model: category) do |form| %>
-  <% if category.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
-
-      <ul>
-        <% category.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div class="container mt-5">
+  <%= form_with(model: category) do |form| %>
+    <% if category.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
+  
+        <ul>
+          <% category.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div>
+      <%= form.label :name, class: "form-label fw-bold" %>
+      <%= form.text_field :name, class: "form-control", placeholder: "category name" %>
+    </div>
+  
+    <div>
+      <%= form.label :icon, class: "form-label fw-bold" %>
+      <%= form.text_field :icon, class: "form-control", placeholder: "image url" %>
+    </div>
+  
+    <div>
+      <%= form.submit "CREATE CATEGORY", class: "mt-4 btn btn-success" %>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :icon, style: "display: block" %>
-    <%= form.text_field :icon %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
