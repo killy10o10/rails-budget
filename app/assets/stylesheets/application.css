@@ -40,13 +40,12 @@ body {
 }
 
 .navbar {
-  background:
-    linear-gradient(
-      90deg,
-      rgba(55, 120, 194, 1) 100%,
-      rgba(2, 0, 36, 1) 0%,
-      rgba(0, 212, 255, 1) 5%
-    );
+  background: linear-gradient(
+    90deg,
+    rgba(55, 120, 194, 1) 100%,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(0, 212, 255, 1) 5%
+  );
   color: #fff;
 }
 
@@ -124,12 +123,12 @@ body {
 }
 
 .btn-success {
-  background-color: #87c75c;
+  background-color: #5fb523;
   border: none;
 }
 
 .btn-success:hover {
-  background-color: #60b524;
+  background-color: #87c75c;
 }
 
 .cat-command {
@@ -164,4 +163,9 @@ body {
   border-radius: 5px;
   padding: 10px;
   width: 20%;
+}
+.new {
+  width: 100%;
+  align-self: flex-end;
+  justify-self: flex-end;
 }
