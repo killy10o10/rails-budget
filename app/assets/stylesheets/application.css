@@ -32,6 +32,7 @@ body {
 
 .splash-btn {
   width: 30%;
+  white-space: nowrap;
 }
 
 .splash-btn a {
@@ -39,21 +40,22 @@ body {
 }
 
 .navbar {
-  background: linear-gradient(
-    90deg,
-    rgba(55, 120, 194, 1) 100%,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(0, 212, 255, 1) 5%
-  );
+  background:
+    linear-gradient(
+      90deg,
+      rgba(55, 120, 194, 1) 100%,
+      rgba(2, 0, 36, 1) 0%,
+      rgba(0, 212, 255, 1) 5%
+    );
   color: #fff;
 }
+
 .user-initial {
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px #eee solid;
-  /* padding: 5px; */
   height: 35px;
   width: 35px;
   cursor: pointer;
@@ -61,7 +63,6 @@ body {
 
 .form-section {
   margin: 20px auto;
-  /* width: 50%; */
 }
 
 .form {
@@ -145,6 +146,7 @@ body {
 #edit {
   background-color: #4188d9;
 }
+
 #edit:hover {
   background-color: #3778c2;
 }

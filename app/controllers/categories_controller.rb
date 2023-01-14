@@ -51,7 +51,7 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   def destroy
     @category = Category.find(params[:id])
-    @category.destroy  
+    @category.destroy
     redirect_to categories_url, notice: 'Budget category was successfully destroyed.'
     # else
     #   render @category, notice: 'Something went wrong! Budget category was not destroyed'

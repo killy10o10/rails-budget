@@ -1,5 +1,4 @@
 class ExpensesController < ApplicationController
-
   # GET /expenses or /expenses.json
   def index
     @expenses = Expense.where(author_id: current_user.id)

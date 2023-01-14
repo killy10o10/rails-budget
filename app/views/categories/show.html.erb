@@ -9,6 +9,7 @@
     <div class="category-text text-secondary gap-2 d-flex flex-column align-self-end">
       <div class="category-name border-bottom d-flex justify-content-between align-items-center">
         <span class="fw-bold fs-4"><%= @category.name %></span>
+        <span class="fw-bold fs-4">$<%= @total_expenses %></span>
         <div class="d-flex gap-2 align-items-baseline justify-content-center mb-2">
           <%= link_to "EDIT", edit_category_path(@category), class: "cat-command", id: "edit" %>
           <%= button_to "DELETE", category_path(@category), method: :delete, class: "cat-command", id: "delete" %> 
