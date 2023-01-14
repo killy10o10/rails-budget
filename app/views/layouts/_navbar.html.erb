@@ -1,0 +1,44 @@
+<nav class="navbar shadow p-3">
+  <% if request.path == root_path || request.path == categories_path %>
+    <div class="hamburger">
+      <i class="bi bi-list"></i>
+    </div>
+  <% else %>
+    <%= link_to categories_path do %>
+      <i class="bi bi-arrow-left"></i>
+    <% end %> 
+  <% end %>
+
+  <div>
+    <% if request.path == new_user_registration_path%>
+      <h3>REGISTER</h3>
+    <% elsif request.path == new_user_session_path%>
+      <h3>LOG IN</h3>
+    <% elsif request.path == categories_path%>
+      <h3>CATEGORIES</h3>
+    <% elsif request.path == new_category_path%>
+      <h3>CREATE CATEGORY</h3>
+    <% elsif request.path == expenses_path%>
+      <h3 >TRANSACTIONS</h3>
+    <% elsif request.path == new_expense_path%>
+      <h3 >CREATE TRANSACTION</h3>
+    <% elsif request.path == new_user_password_path%>
+      <h3>RESET PASSWORD</h3>
+    <% elsif request.path.to_s.include?("edit") && request.path.to_s.include?("categories") %>
+      <h3>EDIT CATEGORY</h3>
+    <% else %>
+      <h3>CATEGORY</h3>
+    <% end %>
+  </div>
+
+  <div class="user d-flex align-items-center gap-3">
+    <% if user_signed_in? %>
+      <%= link_to "Logout", destroy_user_session_path, method: 'delete', :class => 'btn btn-danger' %>
+    <% else %>
+      <%= link_to "Login", new_user_session_path, :class => 'btn btn-success' %>
+    <% end %>
+    <% if user_signed_in? %>
+      <span class="user-initial"><%= current_user.name.split.map(&:first).join.upcase %></span>
+    <% end %>
+  </div>
+</nav>
