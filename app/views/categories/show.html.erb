@@ -1,0 +1,49 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="container">
+
+  <div class="shadow-sm category-details d-flex gap-3">
+    <div class="icon-img">
+      <img class="category-img" src=<%=@category.icon%> alt<%=@category.name%> />
+    </div >
+    <div class="category-text text-secondary gap-2 d-flex flex-column align-self-end">
+      <div class="category-name border-bottom d-flex justify-content-between align-items-center">
+        <span class="fw-bold fs-4 uppercase"><%= @category.name %></span>
+        <span class="fw-bold fs-4">$<%= @total_expenses %></span>
+        <div class="d-flex gap-2 align-items-baseline justify-content-center mb-2">
+          <%= link_to "EDIT", edit_category_path(@category), class: "cat-command", id: "edit" %>
+          <%= button_to "DELETE", category_path(@category), method: :delete, class: "cat-command", id: "delete" %> 
+        </div>
+      </div>
+      <span class="time fst-italic"><%= @category.created_at.strftime('%d %B %Y at %I:%M %p') %></span>
+    </div>
+  </div> <br>
+
+   <% if @expenses.any? %>
+      <% @expenses.each do |trans| %>
+        <div class="shadow-sm d-flex flex-column text-secondary category-details">
+          <div>
+            <p class="d-flex justify-content-between">
+              <span class="fw-bold fs-5 uppercase"><%= trans.expense.name %></span>
+              <span class="fw-bold text-black fs-5">$<%= trans.expense.amount %></span>
+            </p>
+          </div>
+          <div class="d-flex border-bottom  align-items-baseline justify-content-between">
+            <div><p class="time fst-italic"><%= trans.expense.created_at.strftime("%d ") + trans.expense.created_at.strftime("%B")[0..2] + trans.expense.created_at.strftime(" %Y at %I:%M %p") %></p></div>
+            <div class="d-flex gap-2">
+              <%= button_to "EDIT", edit_expense_path(trans.expense), method: :get, class: "cat-command", id: "edit" %>
+              <%= button_to "DELETE", expense_path(trans.expense), method: :delete, class: "cat-command", id: "delete"%>
+            </div>
+          </div> 
+        </div>
+      <% end %>
+
+      <p class="cat-sec-total">
+        <span class="cat-sec-name">TOTAL TRANSACTIONS</span>
+        <span class="cat-card-amount">$<%= @total_expenses %></span>
+      </p>
+  <% end %>
+
+  <button class="btn btn-success new"><%= link_to "NEW TRANSACTION", new_expense_path %></button>
+</div>
+
