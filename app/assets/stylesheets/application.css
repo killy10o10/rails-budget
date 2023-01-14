@@ -171,3 +171,7 @@ body {
   align-self: flex-end;
   justify-self: flex-end;
 }
+
+.uppercase {
+  text-transform: uppercase;
+}
